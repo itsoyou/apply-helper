@@ -1,10 +1,17 @@
-from apply_helper.config import logger, Config
 import time
+
+from apply_helper.config import Config, logger
+
 
 def create_assistant():
     assistant = Config.CLIENT.beta.assistants.create(
         name="File-based Assistant",
-        instructions='Please provide a human-written cover letter for the given job description using persona that has skills mentioned in uploaded resume in PDF file. Also give me interview questions that hiring manager might ask for 40 mins of interview for this person for the position described in the job description.',
+        instructions=(
+            "Please provide a human-written cover letter for the given job description "
+            "using persona that has skills mentioned in uploaded resume in PDF file. "
+            "Also give me interview questions that hiring manager might ask for 40 mins "
+            "of interview for this person for the position described in the job description."
+        ),
         model="gpt-4o-mini",
         tools=[{"type": "file_search"}],
     )
@@ -34,7 +41,9 @@ def checking_status(thread_id, run_id, timeout=30, polling_interval=2):
 
             # Check if run is complete or failed
             if status == "completed":
-                thread_messages = Config.CLIENT.beta.threads.messages.list(thread_id)
+                thread_messages = Config.CLIENT.beta.threads.messages.list(
+                    thread_id
+                )
                 answers = []
 
                 for message in thread_messages.data:
@@ -44,7 +53,7 @@ def checking_status(thread_id, run_id, timeout=30, polling_interval=2):
                                 answers.append(content_item.text.value.strip())
                 logger.debug("Answers: %s", answers)
                 return answers[0] if answers else None
-            
+
             # Check for failed or cancelled states
             elif status in ["failed", "cancelled", "expired"]:
                 logger.error("Run failed with status: %s", status)

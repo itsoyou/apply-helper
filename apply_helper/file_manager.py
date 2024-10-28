@@ -4,8 +4,7 @@ from apply_helper.config import Config, logger
 def allowed_file(filename: str) -> bool:
     return (
         "." in filename
-        and filename.rsplit(".", 1)[1].lower()
-        in Config.ALLOWED_EXTENTIONS
+        and filename.rsplit(".", 1)[1].lower() in Config.ALLOWED_EXTENTIONS
     )
 
 
@@ -21,7 +20,7 @@ def upload_pdf_to_vector_store(client, assistant_id, file_path):
         )
         vector_store_id = vector_store.id
         logger.debug("Vector store created with ID: %s", vector_store_id)
-        
+
         vector_store_response = client.beta.vector_stores.files.create(
             vector_store_id=vector_store.id, file_id=file_data.id
         )

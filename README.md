@@ -8,7 +8,7 @@ Apply Helper is an AI-powered application that assists users in analyzing resume
 
 ## Credit
 
-Thanks to Women Tech Makers for the Generative AI course. This is a project is inspired from https://github.com/WTMBerlin/generative-ai-course.git
+Thanks to Women Tech Makers Berlin for the Generative AI course. This is a project is inspired from https://github.com/WTMBerlin/generative-ai-course.git
 
 ## Features
 
