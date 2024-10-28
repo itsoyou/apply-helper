@@ -3,7 +3,7 @@ import time
 from apply_helper.config import Config, logger
 
 
-def create_assistant():
+def create_assistant() -> str:
     assistant = Config.CLIENT.beta.assistants.create(
         name="File-based Assistant",
         instructions=(

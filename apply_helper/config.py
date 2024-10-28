@@ -14,11 +14,12 @@ class Config:
     UPLOAD_FOLDER = "uploads"
     DEBUG = True
     ALLOWED_EXTENTIONS = {"pdf"}
-    ASSISTANT_ID = None
-    THREAD_ID = None
-    if os.getenv("OPENAI_API_KEY"):
-        OPEN_API_KEY: str = os.getenv("OPENAI_API_KEY")
+    ASSISTANT_ID: str = ""
+    THREAD_ID: str = ""
+    if os.getenv("OPENAI_API_KEY") and isinstance(
+        os.getenv("OPENAI_API_KEY"), str
+    ):
         CLIENT = OpenAI()
-        CLIENT.api_key = OPEN_API_KEY
+        CLIENT.api_key = os.getenv("OPENAI_API_KEY")
     else:
         logger.error("OPEN API KEY does not exists")

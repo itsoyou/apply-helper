@@ -8,7 +8,7 @@ def allowed_file(filename: str) -> bool:
     )
 
 
-def upload_pdf_to_vector_store(client, assistant_id, file_path):
+def upload_pdf_to_vector_store(client, assistant_id: str, file_path):
     try:
         file_data = client.files.create(
             file=open(file_path, "rb"), purpose="assistants"
